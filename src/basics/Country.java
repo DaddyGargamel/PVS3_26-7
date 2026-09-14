@@ -5,7 +5,14 @@ import fileworks.DataImport;
 
 
 public class Country {
+    String name, continent;
+    long population;
+    double avgAge;
     public Country(String name, String continent, long population, Double avgAge) {
+        this.name =  name;
+        this.continent = continent;
+        this.population = population;
+        this.avgAge = avgAge;
     }
 
     public static void main(String[] args) {
@@ -23,7 +30,10 @@ public class Country {
         // Vypsat všechny řádky jako instance objekty (třídy Country)
         // 1. přešíst soubor
         // 1.1 přečíst řádek
-        //
+        // 1.2 do souboru output vypsat pouze
+        // 2. Do konzole vypsat:
+        // země s nejvetším avgAge
+        // země s nejmenší populací
 
         //parsing
         String line = di.readLine();
@@ -40,8 +50,13 @@ public class Country {
                 population,
                 avgAge
         );
-
+        double highestAvgAge = 0;
+        long minPopulation = 0;
+        System.out.println();
         di.finishImport();
+        public String toString() {
+
+        }
 
 
     }

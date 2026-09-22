@@ -1,0 +1,18 @@
+test1{name='It Follows', year=2014, genre='Horror', rating=6.8}
+test1{name='A Quiet Place', year=2018, genre='Horror', rating=7.5}
+test1{name='The Shining', year=1980, genre='Horror', rating=8.8}
+test1{name='The Blair Witch Project', year=1999, genre='Horror', rating=6.5}
+test1{name='Psycho', year=1960, genre='Horror', rating=8.7}
+test1{name='Let the Right One In', year=2008, genre='Horror', rating=7.9}
+test1{name='The Witch', year=2015, genre='Horror', rating=6.9}
+test1{name='Velvet Shadows', year=2021, genre='Horror', rating=8.7}
+test1{name='Paranormal Activity', year=2007, genre='Horror', rating=6.3}
+test1{name='The Ring', year=2002, genre='Horror', rating=7.1}
+test1{name='The Others', year=2001, genre='Horror', rating=7.6}
+test1{name='The Conjuring', year=2013, genre='Horror', rating=7.5}
+test1{name='The Sixth Sense', year=1999, genre='Horror', rating=8.1}
+test1{name='A Nightmare on Elm Street', year=1984, genre='Horror', rating=8.2}
+test1{name='Get Out', year=2017, genre='Horror', rating=8.6}
+test1{name='Saw', year=2004, genre='Horror', rating=7.6}
+test1{name='Insidious', year=2010, genre='Horror', rating=6.8}
+[]

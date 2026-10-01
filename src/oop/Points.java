@@ -1,5 +1,9 @@
 package oop;
 
+import fileworks.DataImport;
+
+import java.util.ArrayList;
+
 public class Points {
     //tady se deje nejaka magie
     public static void main(String[] args) {
@@ -12,6 +16,38 @@ public class Points {
         System.out.println(c);
         System.out.println(a);
         System.out.println("Points created: " + Point.getPointsCreated());
+
+        ArrayList<Point> points = new ArrayList<>();
+
+        DataImport di  = new DataImport("data/points.txt");
+
+        String line;
+        String[] tokens;
+        while (di.hasNext()) {
+            line = di.readLine();
+            tokens = line.split(",");
+
+            switch (tokens.length) {
+                case 2:
+                    points.add(new Point(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1])));
+                    break;
+                case 3:
+                    points.add(new Point(tokens[0], Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+                    break;
+                case 4:
+                    points.add(new Point(tokens[0],
+                            Double.parseDouble(tokens[1]),
+                            Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3])));
+                    break;
+            }
+
+        }
+        di.finishImport();
+        System.out.println(points);
+        for (Point point : points) {
+            System.out.println(point);
+        }
+
     }
 }
 class Point{

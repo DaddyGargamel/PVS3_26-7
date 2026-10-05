@@ -50,7 +50,8 @@ public class Points {
 
     }
 }
-class Point{
+
+class Point {
     private String name;
     private double x, y, z;
     private final double DEFAULT_Z = 0;

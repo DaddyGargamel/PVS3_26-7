@@ -1,12 +1,8 @@
 package oop;
 
-import fileworks.DataImport;
-
-import java.util.ArrayList;
-
 class Product {
     private String name;
-    private String productCategory;
+    private String category;
     private int amount;
     private double pricePerPiece;
 
@@ -20,12 +16,12 @@ class Product {
         this.name = name;
     }
 
-    public String getProductCategory() {
-        return productCategory;
+    public String getCategory() {
+        return category;
     }
 
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getAmount() {
@@ -45,87 +41,56 @@ class Product {
     }
 
     public void setPricePerPiece(double pricePerPiece) {
-        if (pricePerPiece > 0) {
+        if(pricePerPiece > 0){
             this.pricePerPiece = pricePerPiece;
-        } else {
+        }
+        else {
             this.pricePerPiece = 0;
         }
     }
 
-    public Product(String name, String productCategory) {
+    public Product(String name, String category) {
         this.name = name;
-        this.productCategory = productCategory;
+        this.category = category;
     }
 
-    public Product(String name, String productCategory, int amount) {
-        this(name, productCategory);
+    public Product(String name, String category, int amount) {
+        this(name, category);
         this.amount = amount;
     }
 
-//    public Product(String name, int amount, double pricePerPiece){
+    public Product(String name, int amount, int pricePerPiece){
+//        this(name, DEFAULT_CATEGORY, amount, pricePerPiece);
+        this.name = name;
+        this.category = DEFAULT_CATEGORY;
+        this.amount = amount;
+        this.pricePerPiece = pricePerPiece;
+    }
 
-    /// /        this(name, DEFAULT_CATEGORY, amount, pricePerPiece);
-//        this.name = name;
-//        this.category = DEFAULT_CATEGORY;
-//        this.amount = amount;
-//        this.pricePerPiece = pricePerPiece;
-//    }
-    public Product(String name, String productCategory, int amount, double pricePerPiece) {
-        this(name, productCategory, amount);
+    public Product(String name, String category, int amount, int pricePerPiece) {
+        this(name, category, amount);
         this.pricePerPiece = pricePerPiece;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                        name +
-                " ( + productCategory)"   +
+                "name='" + name + '\'' +
+                ", category='" + category + '\'' +
                 ", amount=" + amount +
-                " $ "+ pricePerPiece + '\n';
+                ", pricePerPiece=" + pricePerPiece +
+                '}';
     }
 }
 
 public class Products {
     public static void main(String[] args) {
-        // načíst celý soubor a vypsat počet kusů na skladu
-        DataImport di = new DataImport("data/products.txt");
+    // načíst celý soubor a vypsat počet kusů na skladu
+        Product product = new Product("Chair", 400, 465);
 
-        String line;
-        ArrayList<Product> products = new ArrayList<>();
-        String[] params;
-        Product product;
-        while (di.hasNext()) {
-            line = di.readLine();
-            params = line.split(";");
-
-//            if (params.length == 4) System.out.println("neco");
-//            if (params.length == 3) System.out.println("neco");
-//            if (params.length == 2) System.out.println("neco");
-
-            switch (params.length){
-                case 4: product = new Product(params[0], params[1], Integer.parseInt(params[2]), Double.parseDouble(params[3]));
-                    break;
-                case 3: product = new Product(params[0], params[1], Integer.parseInt(params[2]));
-                    break;
-                case 2: product = new Product(params[0], params[1]);
-                    break;
-                default:
-                    System.out.println("Tento radek nema validni delku: " + line);
-                    product = null;
-                    break;
-            }
-            products.add(product);
-        }
-
-        System.out.println(products);
-        di.finishImport();
-
-//      ukazka zakomentovaneho konstruktoru + null pointer exception
-//        Product product = new Product("Chair", 400, 465);
-
-//        System.out.println(product.getName() + ": "+ product.getAmount());
-//        System.out.println(product.toString());
-//        product.getCategory().toUpperCase();
+        System.out.println(product.getName() + ": "+ product.getAmount());
+        System.out.println(product.toString());
+        product.getCategory().toUpperCase();
 //        product.getName();
 //        product.name;
 

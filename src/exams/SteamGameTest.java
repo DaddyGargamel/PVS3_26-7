@@ -1,55 +1,143 @@
 package exams;
 
 import fileworks.DataImport;
-
 import java.util.ArrayList;
 import java.util.List;
 
-// Soubor má 4 sloupečky oddělené znakem "\t" - tabulátor
-// name	price	num_reviews_total	short_description
-// Některé řádky nemusí obsahovat krátký popisek
-
-// Naimplementujte třídu reprezentující 1 hru/řádek
-// Načtěte soubor
-// Naimplementujte jednotlivé metody
-
-public class SteamGameTest {
+public class        SteamGameTest {
     public static void main(String[] args) {
+
         DataImport di = new DataImport("data/steam_games.txt");
 
-        List<Game> games = new ArrayList<>();
+        ArrayList<Game> games = new ArrayList<>();
+        ArrayList<Game> freeGames = new ArrayList<>();
+        ArrayList<Game> paidGames = new ArrayList<>();
 
-        // TODO: načíst soubor do arraylistu
+        int reviews = 0;
+        double avgReviewPerGame;
+        String line;
+        String[] tokeny;
 
-        System.out.println("Games total loaded: " + games.size());
+        Game mostExpansive = new Game(null, 0.0, 0, null);
 
-        System.out.println("Number of free games: " + totalFreeGames(games));
-        System.out.println("Average number of reviews per game: " + avgReviewPerGame(games));
-        System.out.println("The most expensive game is: " + mostExpansive(games));
 
-        System.out.println(games.get(0));                   // zdarma
-        System.out.println(games.get(games.size() / 2));    // placené
-    }
+        while (di.hasNext()) {
+            line = di.readLine();
+            tokeny = line.split("\t");
 
-    private static Game mostExpansive(List<Game> games) {
-        // TODO: vrátit nejdražší hru
+            if (tokeny.length == 3) {
 
-        return null; // tento řádek smažte
-    }
+                Game game = new Game(tokeny[0], Double.parseDouble(tokeny[1]), Integer.parseInt(tokeny[2]));
+                games.add(game);
 
-    private static long totalFreeGames(List<Game> games) {
-        // TODO: vrátit počet her, které jsou zdarma
+                if (Double.parseDouble(tokeny[1]) == 0.0) {
 
-        return 0L; // tento řádek smažte
-    }
-    private static double avgReviewPerGame(List<Game> games) {
-        // TODO: vrátit průměrný počet hodnocení
+                    freeGames.add(game);
+                }
 
-        return 0.0; // tento řádek smažte
+                else {
+
+                    paidGames.add(game);
+                }
+
+                if (game.price > mostExpansive.price) {
+
+                    mostExpansive = game;
+                }
+
+
+            } else { 
+
+                Game game = new Game(tokeny[0], Double.parseDouble(tokeny[1]), Integer.parseInt(tokeny[2]), tokeny[3]);
+                games.add(game);
+
+                if (Double.parseDouble(tokeny[1]) == 0.0) {
+                    freeGames.add(game);
+                } else {
+                    paidGames.add(game);
+                }
+                if (game.price > mostExpansive.price) {
+                    mostExpansive = game;
+                }
+            }
+        }
+
+
+        
+        System.out.println("Number of games: " + games.size());
+        System.out.println("Number of free games: " + freeGames.size());
+        System.out.println("Number of paid games: " + paidGames.size());
+        System.out.println("The most expensive game: " + mostExpansive);
+
+        di.finishImport();
     }
 }
 
+
 class Game {
-    // TODO: attributy, konstruktor(y), gettery/settery + minimálně toString()
-    // TODO: getter pro krátký popisek bude vracet "Not released yet" pokud není popisek uveden hra je "zdarma"
+    String name;
+    double price;
+    int reviews;
+    String description;
+
+    public Game(String name, double price, int reviews, String description) {
+        this.name = name;
+        this.price = price;
+        this.reviews = reviews;
+        this.description = description;
+    }
+    public Game(String name, double price, int reviews) {
+        this.name = name;
+        this.price = price;
+        this.reviews = reviews;
+
+        if (price == 0.0) {
+            description = "Not released yet";
+        } else {
+            description = "N/A";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "name: '" + name + '\'' +
+                ", price: " + price +
+                ", reviewsCount: " + reviews +
+                ", description: '" + description + '\'' +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getReviews() {
+        return reviews;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setReviewsCount(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }

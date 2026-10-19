@@ -1,18 +1,17 @@
-test1{name='It Follows', year=2014, genre='Horror', rating=6.8}
-test1{name='A Quiet Place', year=2018, genre='Horror', rating=7.5}
-test1{name='The Shining', year=1980, genre='Horror', rating=8.8}
-test1{name='The Blair Witch Project', year=1999, genre='Horror', rating=6.5}
-test1{name='Psycho', year=1960, genre='Horror', rating=8.7}
-test1{name='Let the Right One In', year=2008, genre='Horror', rating=7.9}
-test1{name='The Witch', year=2015, genre='Horror', rating=6.9}
-test1{name='Velvet Shadows', year=2021, genre='Horror', rating=8.7}
-test1{name='Paranormal Activity', year=2007, genre='Horror', rating=6.3}
-test1{name='The Ring', year=2002, genre='Horror', rating=7.1}
-test1{name='The Others', year=2001, genre='Horror', rating=7.6}
-test1{name='The Conjuring', year=2013, genre='Horror', rating=7.5}
-test1{name='The Sixth Sense', year=1999, genre='Horror', rating=8.1}
-test1{name='A Nightmare on Elm Street', year=1984, genre='Horror', rating=8.2}
-test1{name='Get Out', year=2017, genre='Horror', rating=8.6}
-test1{name='Saw', year=2004, genre='Horror', rating=7.6}
-test1{name='Insidious', year=2010, genre='Horror', rating=6.8}
-[]
+It Follows, 2014, Horror, 6.8
+A Quiet Place, 2018, Horror, 7.5
+The Shining, 1980, Horror, 8.8
+The Blair Witch Project, 1999, Horror, 6.5
+Psycho, 1960, Horror, 8.7
+Let the Right One In, 2008, Horror, 7.9
+The Witch, 2015, Horror, 6.9
+Velvet Shadows, 2021, Horror, 8.7
+Paranormal Activity, 2007, Horror, 6.3
+The Ring, 2002, Horror, 7.1
+The Others, 2001, Horror, 7.6
+The Conjuring, 2013, Horror, 7.5
+The Sixth Sense, 1999, Horror, 8.1
+A Nightmare on Elm Street, 1984, Horror, 8.2
+Get Out, 2017, Horror, 8.6
+Saw, 2004, Horror, 7.6
+Insidious, 2010, Horror, 6.8

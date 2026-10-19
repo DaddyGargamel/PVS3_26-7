@@ -1,17 +1,17 @@
-package test;
+package exams;
 
 import fileworks.DataExport;
 import fileworks.DataImport;
 
 import java.util.ArrayList;
 
-public class test1 {
+public class exam1 {
     String name;
     Integer year;
     String genre;
     Double rating;
 
-    public test1(String name, Integer year, String genre, Double rating) {
+    public exam1(String name, Integer year, String genre, Double rating) {
         this.name = name;
         this.year = year;
         this.genre = genre;
@@ -20,12 +20,11 @@ public class test1 {
 
     @Override
     public String toString() {
-        return "test1{" +
-                "name='" + name + '\'' +
-                ", year=" + year +
-                ", genre='" + genre + '\'' +
-                ", rating=" + rating +
-                '}';
+        return
+                name  +
+                ", " + year +
+                ", " + genre  +
+                ", " + rating;
     }
 
     public String getName() {
@@ -48,13 +47,12 @@ public class test1 {
         DataImport di = new DataImport("data/movieList.txt");
         DataExport de = new DataExport("data/horrors.txt");
         Integer countNewMovies = 0;
-        test1 bestRating = new test1("TBD", 0, "TBD", Double.MIN_VALUE);
-        ArrayList<test1> horrorMovies = new ArrayList<>();
+        exam1 bestRating = new exam1("TBD", 0, "TBD", Double.MIN_VALUE);
                 while (di.hasNext()) {
                     String line = di.readLine();
                     String[] tokens = line.split(";");
 
-                    test1 movies = new test1(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Double.parseDouble(tokens[3]));
+                    exam1 movies = new exam1(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Double.parseDouble(tokens[3]));
 
                     String name = tokens[0];
                     Integer year = Integer.parseInt(tokens[1]);
@@ -86,7 +84,6 @@ public class test1 {
                 System.out.println("Počet filmů po roce 2000: " + countNewMovies);
                 System.out.println(bestRating);
 
-                de.writeLine(String.valueOf(horrorMovies));
                 de.finishExport();
                 di.finishImport();
     }

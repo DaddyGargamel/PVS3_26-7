@@ -55,7 +55,7 @@ class Cat extends Animal {
 class Pig extends Animal {
     int mudLevel;
 
-    public Pig(String name, double energy) {
+    public Pig(String name, double energy, int mudLevel) {
         super(name, energy);
     }
 
@@ -72,7 +72,7 @@ class Pig extends Animal {
 
 class Main {
     public static void main(String[] args) {
-        Animal c = new Cat();
+        /*Animal c = new Cat();
         c.eat();
         c.name = "Betsy";
         c.makeNoise();
@@ -81,15 +81,36 @@ class Main {
         d.name = "Arnold";
         d.breed = "Zlatý retriever";
         d.eat();
-        d.makeNoise();
+        d.makeNoise();*/
 
 
 
         List<Animal> animals = new ArrayList<>();
-        animals.add(c);
-        animals.add(d);
+        /*animals.add(c);
+        animals.add(d);*/
 
         DataImport di = new DataImport("data/animals.txt");
+        // přeskočit hlavičku
+        di.readLine();
+        while(di.hasNext()) {
+            String line = di.readLine();
+            String[] tokens = line.trim().split(";");
+
+            // Přidat do listu animals zvíře
+            switch (tokens[0]) {
+                case "Dog": {
+                    animals.add(new Dog(tokens[2], Double.parseDouble(tokens[1]), tokens[3]));
+                    break;
+                }
+                case "Cat": {
+                    animals.add(new Cat(tokens[2], Double.parseDouble(tokens[1])));
+                    break;
+                }
+                case "Pig": {
+                    animals.add(new Pig(tokens[2], Double.parseDouble(tokens[1]), Integer.parseInt(tokens[4])));
+                }
+            }
+        }
 
     }
 }

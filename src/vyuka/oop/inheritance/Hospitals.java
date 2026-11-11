@@ -27,7 +27,7 @@ public class Hospitals {
         CardiacSurgeon cs = new CardiacSurgeon("Max");
         System.out.println(cs);
 
-        //tohle ještě půjde
+        //tohle ještě pujde
         Doctor example = new CardiacSurgeon("Terry");
         example.diagnose();
 

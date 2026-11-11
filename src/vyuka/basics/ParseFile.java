@@ -1,129 +1,110 @@
-package vyuka.basics;
+package Vyuka.basics;
 
 import fileworks.DataExport;
 import fileworks.DataImport;
 
+import java.io.IOException;
+import java.util.Arrays;
 
 public class ParseFile {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        //import souboru
         String path = "data/countries.txt";
         DataImport di = new DataImport(path);
 
-        // di.printFile();
-//        System.out.println(di.readLine()); // výpis jednoho řádku
-//
-//        // TODO: Vypsat informace jednoho řádku
-//        String name;
-//        String continent;
-//        long population;
-//        double avgAge;
-//
-//        // načíst je z jednoho řádku
-//        di.readLine();
-//        di.readLine();
-//        di.readLine();
-//
-//
-//        di.reinitializeRead();
-//        // vypsat celý obsah bez printFile
-//
-//        String line = "";
-//        while(di.hasNext()){
-//            line = di.readLine();
-//        }
-//
-//        // String line = di.readLine();
-//
-//        String[] tokens = line.split(";");
-//
-//        name = tokens[0];
-//        continent = tokens[1];
-//        population = Long.parseLong(tokens[2]);
-//        avgAge = Double.parseDouble(tokens[3]);
-//
-//        System.out.println(name);
-//        System.out.println(continent);
-//        System.out.println(population);
-//        System.out.println(avgAge);
-        Country czechia = new Country("Czech Republic",
-                "Europe",
-                10_800_000,
-                85.0);
+        /*
+              //di.printFile(); //vypis vseho
+              System.out.println(di.readLine()); //vypis radku
 
+              //vypis informace jednoho radku
+              String name;
+              String continent;
+              long population;
+              double avgAge;
+
+              //vypis vseho, bez printFile
+              di.reinitializeRead();
+              while (di.hasNext()){
+                  System.out.println(di.readLine());
+              }
+
+              //nacteni, rozdeleni, parsing a vypis jednoho radku
+              String output = di.readLine();
+              String [] tokens = output.split(";");
+
+              name = tokens[0];
+              continent = tokens[1];
+              population = Long.parseLong(tokens[2]);
+              avgAge = Double.parseDouble(tokens[3]);
+
+              System.out.println(name);
+              System.out.println(continent);
+              System.out.println(population);
+              System.out.println(avgAge);
+         */
+
+        //vypis jednoho radku jako objekt tridy country
+
+        Country czechia = new Country("Czech Republic", "Europa", 10800000L, 85.0);
         System.out.println(czechia);
+
+        //export souboru
         DataExport de = new DataExport("output.txt");
 
 
-        Country bestAge = new Country("TBD", "TBD", 42, Double.MIN_VALUE);
+
+  //     while (di.hasNext()) {
+  //         //vypis vsech radku jako objekty tridy country
+  //         String line = di.readLine();
+  //         String[] tokens = line.split(";");
+
+  //         String name = tokens[0];
+  //         String continent = tokens[1];
+  //         long population = Long.parseLong(tokens[2]);
+  //         double avgAge = Double.parseDouble(tokens[3]);
+
+  //         Country oneCountry = new Country(name, continent, population, avgAge);
+
+  //         if (oneCountry.continent.equals("Europe")){
+  //             de.writeLine(oneCountry.toString());
+  //         }
+
+  //         System.out.println(oneCountry);
+  //     }
+
+        Country bestAge = new Country("TBD", "TBD", 42L, Double.MIN_VALUE);
         Country worstPopulation = new Country("TBD", "TBD", Long.MAX_VALUE, 42);
 
-        // Vypsat všechny řádky jako objekty (třídy Country)
-        // 1. přečíst soubor
-        //  1.1 přečíst řádek
-        // 2. Do konzole vypsat:
-        // zeme s nejvetsim avgAge
-        // zeme s nejmensi populaci
+        while(di.hasNext()){
+            String radek = di.readLine();
+            String [] casti = radek.split(";");
 
-        while (di.hasNext()) {
-            String line = di.readLine();
-            String[] tokens = line.split(";");
+            String jmeno = casti[0];
+            String kontinent = casti[1];
+            Long populace = Long.parseLong(casti[2]);
+            double prumernyVek = Double.parseDouble(casti[3]);
 
-            String name = tokens[0];
-            String continent = tokens[1];
-            long population = Long.parseLong(tokens[2]);
-            double averageAge = Double.parseDouble(tokens[3]);
-
-            if(bestAge.avgAge < averageAge) {
-                bestAge.name = name;
-                bestAge.continent = continent;
-                bestAge.population = population;
-                bestAge.avgAge = averageAge;
+            //vypis nejvetsi prumerneho veku
+            if (bestAge.avgAge < prumernyVek){
+                bestAge.name = jmeno;
+                bestAge.continent = kontinent;
+                bestAge.population = populace;
+                bestAge.avgAge = prumernyVek;
+            }
+            //vypis nejhorsi populace
+            if (worstPopulation.avgAge > populace){
+                worstPopulation.name = jmeno;
+                worstPopulation.continent = kontinent;
+                worstPopulation.population = populace;
+                worstPopulation.avgAge = prumernyVek;
             }
 
-            if(worstPopulation.population > population){
-                worstPopulation.name = name;
-                worstPopulation.continent = continent;
-                worstPopulation.population = population;
-                worstPopulation.avgAge = averageAge;
-            }
 
-           /* String line = di.readLine(); // načíst řádek
-            String[] tokens = line.split(";"); // rozsekat řádek
-
-            // parsing
-            String name = tokens[0];
-            String continent = tokens[1];
-            long population = Long.parseLong(tokens[2]);
-            double avgAge = Double.parseDouble(tokens[3]);
-
-            // vytvoření objektu
-            Country oneCountry = new Country(
-                    name,
-                    continent,
-                    population,
-                    avgAge
-            );
-
-            if (oneCountry.continent.equals("Europe")){
-                de.writeLine(oneCountry.toString());
-            }
-            if (oneCountry.avgAge > bestAge.avgAge){
-                bestAge = oneCountry;
-            }
-
-            if (oneCountry.population < worstPopulation.population){
-                worstPopulation = oneCountry;
-            }
-
-            System.out.println(oneCountry);*/
         }
+        System.out.println(bestAge);
+        System.out.println(worstPopulation);
 
-        //export
         de.finishExport();
-
-        System.out.println("------");
-        System.out.println("Nejhorsi populace: " + worstPopulation);
-        System.out.println("Nejlepsi doba doziti: " + bestAge);
         di.finishImport();
     }
 }

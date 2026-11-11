@@ -1,17 +1,16 @@
-package vyuka.basics;
+package Vyuka.basics;
 
 import java.util.Arrays;
-
 public class ParseSimple {
     public static void main(String[] args) {
-        String data = "This is a number:3";
+        String something = "This is a number:3:2:1:0";
 
-        // data.substring(data.indexOf(':')); // rozdělit pomocí substringu
-        String[] tokens = data.split(":");
-        System.out.println("Tokens: " + Arrays.toString(tokens));
+        //something.substring(something.indexOf(":")); //rozdeleni retezce
+        String[]tokens = something.split(":");
+            System.out.println("Tokens: " + Arrays.toString(tokens));
 
-
-        int parsedNumber = Integer.parseInt(tokens[1]);
-        System.out.println(parsedNumber * 2);
+        //predelani na cislo
+        int parsedNumber = Integer.parseInt(tokens[2]);
+            System.out.println(parsedNumber);
     }
 }

@@ -1,86 +1,17 @@
-package vyuka.oop;
+package Vyuka.OOP;
 
 import fileworks.DataImport;
 
 import java.util.ArrayList;
 
-public class Points {
-    //tady se deje nejaka magie
-    public static void main(String[] args) {
-        Point a = new Point(44.5, 22.1);
-        Point b = new Point(44.5, 22.1);
-        Point c = new Point(44.5, 22.1);
+class Point{
+   private String name;
+   private Double x, y, z;
+   private final double DEFAULT_Z = 0;
+   private static int pointsCreated = 1;
 
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(c);
-        System.out.println(a);
-        System.out.println("Points created: " + Point.getPointsCreated());
-
-        ArrayList<Point> points = new ArrayList<>();
-
-        DataImport di  = new DataImport("data/points.txt");
-
-        String line;
-        String[] tokens;
-        while (di.hasNext()) {
-            line = di.readLine();
-            tokens = line.split(",");
-
-            switch (tokens.length) {
-                case 2:
-                    points.add(new Point(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1])));
-                    break;
-                case 3:
-                    points.add(new Point(tokens[0], Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
-                    break;
-                case 4:
-                    points.add(new Point(tokens[0],
-                            Double.parseDouble(tokens[1]),
-                            Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3])));
-                    break;
-            }
-
-        }
-        di.finishImport();
-        System.out.println(points);
-        for (Point point : points) {
-            System.out.println(point);
-        }
-
-    }
-}
-
-class Point {
-    private String name;
-    private double x, y, z;
-    private final double DEFAULT_Z = 0;
-    //pomocne pocitadlo = globalni promenna
-    private static int pointsCreated = 1;
-
-    public Point(String name, double x, double y, double z) {
-        this(name, x, y);
-        this.z = z;
-    }
-
-    public Point(String name, double x, double y) {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        z = DEFAULT_Z;
-    }
-
-    public Point(double x, double y) {
-        this.x = x;
-        this.y = y;
-        z = DEFAULT_Z;
-        name = "Point#" + pointsCreated;
-        pointsCreated++;
-    }
-
-    @Override
-    public String toString() {
-        return name + "(" + x + ", " + y + ", " + z + ")";
+    public static int getPointsCreated() {
+        return pointsCreated;
     }
 
     public String getName() {
@@ -91,31 +22,88 @@ class Point {
         this.name = name;
     }
 
-    public double getX() {
+    public Double getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(Double x) {
         this.x = x;
     }
 
-    public double getY() {
+    public Double getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(Double y) {
         this.y = y;
     }
 
-    public double getZ() {
+    public Double getZ() {
         return z;
     }
 
-    public void setZ(double z) {
+    public void setZ(Double z) {
         this.z = z;
     }
 
-    public static int getPointsCreated() {
-        return pointsCreated;
+    public Point(String name, Double x, Double y, Double z) {
+        this(name, x, y);
+        this.z = z;
+    }
+
+    public Point(String name, Double x, Double y) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        z = DEFAULT_Z;
+    }
+
+    public Point(Double x, Double y) {
+        this.x = x;
+        this.y = y;
+        z = DEFAULT_Z;
+        name = "Point#" + pointsCreated;
+        pointsCreated++;
+    }
+
+    @Override
+    public String toString (){
+        return name + " " + x + " " + y + " " +z;
+    }
+}
+
+
+
+public class Points {
+    public static void main(String[] args) {
+        DataImport di = new DataImport("data/points.txt");
+        ArrayList<Point> points = new ArrayList<>();
+
+        String line;
+        String[] tokens;
+
+        while (di.hasNext()){
+            line = di.readLine();
+            tokens = line.split(",");
+
+            switch (tokens.length){
+                case 2 : points.add(new Point(Double.parseDouble(tokens[0]),
+                        Double.parseDouble(tokens[1])));
+                    break;
+                case 3 : points.add(new Point(tokens[0],
+                        Double.parseDouble(tokens[1]),
+                        Double.parseDouble(tokens[2])));
+                    break;
+                case 4 : points.add(new Point(tokens[0],
+                        Double.parseDouble(tokens[1]),
+                        Double.parseDouble(tokens[2]),
+                        Double.parseDouble(tokens[3])));
+                    break;
+            }
+
+        }
+
+
+        di.finishImport();
     }
 }

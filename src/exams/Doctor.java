@@ -1,11 +1,14 @@
-package vyuka.exams;
+package exams;
 
 public class Doctor {
+    final static int BASE_SALARY = 50000;
 
-    final static int BASE_SALARY = 50_000;
-    public int numberOfPenalizations;
     public String name;
     public int salary;
+
+    public int getSalary() {
+        return salary;
+    }
 
     public Doctor(String name) {
         this.name = name;
@@ -14,7 +17,11 @@ public class Doctor {
 
     public void diagnose() {
         System.out.println("Figuring out what's wrong with you...");
-        salary += 10_000;
+        salary += 10000;
     }
 
+    @Override
+    public String toString() {
+        return name + ", Salary: " + salary;
+    }
 }

@@ -1,12 +1,17 @@
-package vyuka.oop;
+package Vyuka.OOP;
 
-class Product {
+
+import fileworks.DataImport;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Product{
     private String name;
     private String category;
     private int amount;
     private double pricePerPiece;
 
-    private final String DEFAULT_CATEGORY = "Other";
 
     public String getName() {
         return name;
@@ -29,9 +34,10 @@ class Product {
     }
 
     public void setAmount(int amount) {
-        if (amount >= 0) {
+        if (amount > 0){
             this.amount = amount;
-        } else {
+        }
+        else {
             this.amount = 0;
         }
     }
@@ -41,7 +47,7 @@ class Product {
     }
 
     public void setPricePerPiece(double pricePerPiece) {
-        if(pricePerPiece > 0){
+        if (pricePerPiece > 0){
             this.pricePerPiece = pricePerPiece;
         }
         else {
@@ -59,18 +65,11 @@ class Product {
         this.amount = amount;
     }
 
-    public Product(String name, int amount, int pricePerPiece){
-//        this(name, DEFAULT_CATEGORY, amount, pricePerPiece);
-        this.name = name;
-        this.category = DEFAULT_CATEGORY;
-        this.amount = amount;
-        this.pricePerPiece = pricePerPiece;
-    }
-
-    public Product(String name, String category, int amount, int pricePerPiece) {
+    public Product(String name, String category, int amount, double pricePerPiece) {
         this(name, category, amount);
         this.pricePerPiece = pricePerPiece;
     }
+
 
     @Override
     public String toString() {
@@ -85,15 +84,42 @@ class Product {
 
 public class Products {
     public static void main(String[] args) {
-    // načíst celý soubor a vypsat počet kusů na skladu
-        Product product = new Product("Chair", 400, 465);
+        DataImport di = new DataImport("data/products.txt");
+        List<Product> produkty = new ArrayList<>();
 
-        System.out.println(product.getName() + ": "+ product.getAmount());
-        System.out.println(product.toString());
-        product.getCategory().toUpperCase();
-//        product.getName();
-//        product.name;
+        while (di.hasNext()){
+            String line = di.readLine();
+            String[] tokens = line.split(";");
 
+            if (tokens.length == 2) {
+                Product zbozi = new Product(
+                        tokens[0],
+                        tokens[1]
+                );
+                produkty.add(zbozi);
+            }
 
+            if (tokens.length == 3) {
+                Product zbozi = new Product(
+                        tokens[0],
+                        tokens[1],
+                        Integer.parseInt(tokens[2])
+                );
+                produkty.add(zbozi);
+            }
+
+            if (tokens.length == 4) {
+                Product zbozi = new Product(
+                        tokens[0],
+                        tokens[1],
+                        Integer.parseInt(tokens[2]),
+                        Double.parseDouble(tokens[3])
+                );
+                produkty.add(zbozi);
+            }
+        }
+
+        System.out.println(produkty.size());
+        di.finishImport();
     }
 }

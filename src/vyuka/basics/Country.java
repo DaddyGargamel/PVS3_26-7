@@ -1,46 +1,64 @@
-package vyuka.basics;
+package Vyuka.basics;
+
+import java.util.Comparator;
 
 public class Country {
-    public String name;
+    String name;
     String continent;
-    long population;
+    Long population;
     double avgAge;
 
-    // private static final int MAX_AVG_AGE = 101;
-    // alt + insert
-
-    public Country(String name, String continent, long population, double avgAge) {
+    public Country(String name, String continent, Long population, double avgAge) {
         this.name = name;
         this.continent = continent;
-        setPopulation(population); // 10_000 ... 2_000_000_000
-        setAvgAge(avgAge);
-    }
-
-    public Country(String name, long population, double avgAge) {
-        this.name = name;
-        this.continent = "Not Specified";
         setPopulation(population);
         setAvgAge(avgAge);
     }
 
-    public void setPopulation(long population) {
-        if (population < 10_000 || population > 2_000_000_000) {
-            System.out.println("Population out of range");
-        } else {
-            this.population = population;
+    public Country(String name, long population, double avgAge){
+        this.name = name;
+        this.continent = "Not Specified";
+        setPopulation(population);
+        setAvgAge(avgAge);
+
+    }
+
+    public static final Comparator<Country> BY_AVG_AGE = new Comparator<Country>() {
+        @Override
+        public int compare(Country o1, Country o2) {
+            double totalAvgAge1 = o1.avgAge;
+            double totalAvgAge2 = o2.avgAge;
+            return Double.compare(totalAvgAge1, totalAvgAge2);
+        }
+    };
+
+    public  void setAvgAge (double avgAge){
+        if (avgAge >= 20 && avgAge <= 101){
+            this.avgAge = avgAge;
+            return;
+        }
+        else {
+            this.avgAge = 0.0d;
         }
     }
 
-    public void setAvgAge(double avgAge) {
-        if (avgAge >= 20 && avgAge <= 101) {
-            this.avgAge = avgAge;
-        } else {
-            this.avgAge = 0.0d;
+    public void setPopulation (long population){
+        if (population < 10_000 || population > 2_000_000_000){
+            System.out.println("Population out of range");
+        }
+        else{
+            this.population = population;
         }
     }
 
     @Override
     public String toString() {
-        return name + " (" + continent + ") [" + population + " people, average life expectancy: " + avgAge + "]";
+        return "Country{" +
+                "name='" + name + '\'' +
+                ", continent='" + continent + '\'' +
+                ", population=" + population +
+                ", avgAge=" + avgAge +
+                '}';
     }
 }
+

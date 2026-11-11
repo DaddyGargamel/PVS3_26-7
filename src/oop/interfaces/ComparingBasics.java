@@ -1,11 +1,9 @@
 package oop.interfaces;
 
 
-import javax.lang.model.type.MirroredTypeException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class ComparingBasics {
 

@@ -1,4 +1,4 @@
-package vyuka.basics;
+package basics;
 
 import fileworks.DataExport;
 

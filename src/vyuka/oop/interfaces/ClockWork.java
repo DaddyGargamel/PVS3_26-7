@@ -1,4 +1,6 @@
-package vyuka.oop.interfaces;
+package Vyuka.OOP.interfaces;
+
+
 
 public class ClockWork {
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class ClockWork {
     }
 }
 
-class DigitalClock implements TimeSupport {
+class DigitalClock implements TimeSupport{
     int year, month, day, hour, minute;
 
     public DigitalClock(int year, int month, int day, int hour, int minute) {
@@ -33,7 +35,7 @@ class DigitalClock implements TimeSupport {
     }
 }
 
-class StopWatch implements TimeSupport {
+class StopWatch implements TimeSupport{
     long milliseconds;
     long start;
     long stop;

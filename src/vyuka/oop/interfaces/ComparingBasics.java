@@ -1,4 +1,4 @@
-package vyuka.oop.interfaces;
+package Vyuka.OOP.interfaces;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,9 +21,13 @@ public class ComparingBasics {
 
         printList(items);
         System.out.println("\n");
+
         Collections.sort(items);
         printList(items);
         System.out.println("\n");
+
+        items.sort(Item.BY_TOTAL_PRICE);
+        printList(items);
     }
 }
 
@@ -32,10 +36,19 @@ class Item implements Comparable<Item>{
     int quantity;
     double price;
 
-    public static Comparator<Item> BY_PRICE = new Comparator<Item>() {
+    public static final Comparator<Item> BY_PRICE = new Comparator<Item>() {
         @Override
         public int compare(Item o1, Item o2) {
             return Double.compare(o1.price, o2.price);
+        }
+    };
+
+    public static final Comparator<Item> BY_TOTAL_PRICE = new Comparator<Item>() {
+        @Override
+        public int compare(Item o1, Item o2) {
+            double totalPrice1 = o1.price * o1.quantity;
+            double totalPrice2 = o2.price * o2.quantity;
+            return Double.compare(totalPrice1, totalPrice2);
         }
     };
 
@@ -47,14 +60,23 @@ class Item implements Comparable<Item>{
 
     @Override
     public String toString() {
-        return name + ", " + quantity + "×, " + price + "$";
+        return name + ", " + quantity + "×, " + price + "$, " + "total price: " + price * quantity;
     }
 
     @Override
     public int compareTo(Item o) {
+        return this.name.compareTo(o.name);
+    }
+
+    /*
+    @Override
+    public int compareTo(Item o) {
         return Double.compare(this.price, o.price);
     }
+
+    @Override
+    public int compareTo(Item o) {
+        return Integer.compare(this.quantity, o.quantity);
+    }
+    */
 }
-
-
-

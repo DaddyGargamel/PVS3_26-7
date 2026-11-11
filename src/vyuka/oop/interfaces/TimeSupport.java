@@ -1,4 +1,4 @@
-package vyuka.oop.interfaces;
+package Vyuka.OOP.interfaces;
 
 public interface TimeSupport {
 

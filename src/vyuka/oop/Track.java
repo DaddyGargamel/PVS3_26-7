@@ -1,5 +1,6 @@
-package vyuka.oop;
+package Vyuka.OOP;
 
+import fileworks.DataExport;
 import fileworks.DataImport;
 
 import java.util.ArrayList;
@@ -27,6 +28,49 @@ public class Track {
                 '}';
     }
 
+    public static void main(String[] args) {
+        DataImport di = new DataImport("data/tracks.txt");
+        DataExport de = new DataExport("horrors.txt");
+
+        ArrayList<Track> tracks = new ArrayList<>();
+
+        while (di.hasNext()){
+            String line = di.readLine();
+            String[] tokens = line.split(";");
+
+            Track song = new Track(tokens[0],
+                    Integer.parseInt(tokens[1]),
+                    Double.parseDouble(tokens[2]),
+                    Integer.parseInt(tokens[3]));
+
+            tracks.add(song);
+
+        }
+        System.out.println(tracks.get(0));
+        System.out.println(tracks.get(tracks.size()-1));
+        de.finishExport();
+        di.finishImport();
+    }
+
+    public void setDuration (int duration){
+        if (duration < 0){
+            System.out.println("Neplatna hodnota");
+            return;
+        }
+        else {
+            this.duration = duration;
+        }
+    }
+    public  void setRating (double rating){
+        if (rating < 0.0 || rating > 10.0){
+            System.out.println("Neplatna hodnota");
+            return;
+        }
+        else {
+            this.rating = rating;
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -42,26 +86,4 @@ public class Track {
     public int getDuration() {
         return duration;
     }
-
-
-    public static void main(String[] args) {
-        DataImport di = new DataImport("data/tracks.txt");
-        ArrayList<Track> tracks = new ArrayList<>();
-        while (di.hasNext()){
-            String line = di.readLine();
-            String[] parts = line.split(";");
-            Track song = new Track(parts[0],
-                    Integer.parseInt(parts[1]),
-                    Double.parseDouble(parts[2]),
-                    Integer.parseInt(parts[3]));
-
-            tracks.add(song);
-        }
-
-        //arraylist zaklady:
-        System.out.println(tracks.get(0));
-        System.out.println(tracks.get(tracks.size()-1));
-        di.finishImport();
-    }
-
 }
